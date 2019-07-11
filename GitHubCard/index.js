@@ -2,7 +2,7 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
-axios.get(`https://api.github.com/users/HannahMarieWieser`);
+//axios.get(`https://api.github.com/users/HannahMarieWieser`);
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -17,8 +17,42 @@ axios.get(`https://api.github.com/users/HannahMarieWieser`);
 /* Step 4: Pass the data received from Github into your function, 
            create a new component and add it to the DOM as a child of .cards
 */
+const addcard = document.querySelector('.cards')
+
+axios.get(`https://api.github.com/users/HannahMarieWieser`)
+  
+.then(data => {
+    console.log('sucess', data)
+
+    
+    const imageUrl = data.avatar_url;
+    const realname = data.login;
+    const githubname = data.login;
+    const reallocation = data.location;
+    const githubaddress = data.html_url;
+    const followercount = data.followers;
+    const followingcount = data.following;
+    const userbio = data.bio;
+
+    const element = createCard(userurl)
+
+  })
+
+  .catch(error => {
+    console.log('not loading user', error)
+  })
 
 
+/*
+  userimg.src = imageUrl;
+nametitle.textContent = realname;
+usernamep.textContent = githubname;
+locationp.textContent = reallocation;
+addressp.src = githubaddress;
+follower.textContent = followercount;
+following.textContent = followingcount;
+biop.textContent = userbio;
+*/
 
 /* Step 5: Now that you have your own card getting added to the DOM, either 
           follow this link in your browser https://api.github.com/users/<Your github name>/followers 
@@ -31,6 +65,11 @@ axios.get(`https://api.github.com/users/HannahMarieWieser`);
 */
 
 const followersArray = [];
+
+
+
+
+
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -94,8 +133,6 @@ function createCard(inputObj){
   follower.textContent = followercount;
   following.textContent = followingcount;
   biop.textContent = userbio;
-
-
 
   return carddiv
 }
