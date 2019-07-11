@@ -12,35 +12,55 @@
 */
 
 
-
-
 /* Step 4: Pass the data received from Github into your function, 
            create a new component and add it to the DOM as a child of .cards
 */
+
+//axios.get(`https://api.github.com/users/HannahMarieWieser`)
+
+
 const addcard = document.querySelector('.cards')
 
-axios.get(`https://api.github.com/users/HannahMarieWieser`)
+// bigarr = [friends, instructors]
+
+// const friends =[
+//   axios.get(`https://api.github.com/users/tetondan`), 
+//   axios.get(`https://api.github.com/users/dustinmyers`),
+// ]
+
+const instructors = [
+  axios.get(`https://api.github.com/users/tetondan`), 
+  axios.get(`https://api.github.com/users/dustinmyers`),
+  axios.get(`https://api.github.com/users/justsml`), 
+  axios.get(`https://api.github.com/users/luishrd`), 
+  axios.get(`https://api.github.com/users/bigknell`),
+  axios.get(`https://api.github.com/users/danbergelt`)
+];
+
+
+instructors.forEach(person => {
+  person
   
-.then(data => {
-    console.log('sucess', data)
+  .then(data => {
+    console.log('success', data)
 
-    
-    const imageUrl = data.avatar_url;
-    const realname = data.login;
-    const githubname = data.login;
-    const reallocation = data.location;
-    const githubaddress = data.html_url;
-    const followercount = data.followers;
-    const followingcount = data.following;
-    const userbio = data.bio;
-
-    const element = createCard(userurl)
+    const apidata = data.data;
+    const element = createCard(apidata)
+    addcard.appendChild(element)
 
   })
 
-  .catch(error => {
-    console.log('not loading user', error)
-  })
+  // .catch(error => {
+  //   console.log('Error loading user', error)
+  // })
+
+
+
+})
+
+
+
+  
 
 
 /*
@@ -64,7 +84,6 @@ biop.textContent = userbio;
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
 
 
 
@@ -92,7 +111,7 @@ const followersArray = [];
 */
 
 //create elements
-function createCard(inputObj){
+function createCard(input){
   const carddiv = document.createElement('div');
   const userimg = document.createElement('img');
   const cardinfo = document.createElement('div');
@@ -125,19 +144,18 @@ function createCard(inputObj){
   usernamep.classList.add('username');
 
   //add content
-  userimg.src = imageUrl;
-  nametitle.textContent = realname;
-  usernamep.textContent = githubname;
-  locationp.textContent = reallocation;
-  addressp.src = githubaddress;
-  follower.textContent = followercount;
-  following.textContent = followingcount;
-  biop.textContent = userbio;
+  userimg.src = input.avatar_url;
+  nametitle.textContent = input.login;
+  usernamep.textContent = input.login;
+  locationp.textContent = `Location: ${input.location}`;
+  profilep.textContent = 'Profile:'
+  addressp.src = input.html_url;
+  follower.textContent = `Followers: ${input.followers}`;
+  following.textContent = `Following: ${input.following}`;
+  biop.textContent = `Bio: ${input.bio}`;
 
   return carddiv
 }
-
-
 
 /* List of LS Instructors Github username's: 
   tetondan
