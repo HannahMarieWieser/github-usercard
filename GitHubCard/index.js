@@ -2,6 +2,7 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+axios.get(`https://api.github.com/users/HannahMarieWieser`);
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -10,9 +11,14 @@
    Skip to Step 3.
 */
 
+
+
+
 /* Step 4: Pass the data received from Github into your function, 
            create a new component and add it to the DOM as a child of .cards
 */
+
+
 
 /* Step 5: Now that you have your own card getting added to the DOM, either 
           follow this link in your browser https://api.github.com/users/<Your github name>/followers 
@@ -45,6 +51,56 @@ const followersArray = [];
 </div>
 
 */
+
+//create elements
+function createCard(inputObj){
+  const carddiv = document.createElement('div');
+  const userimg = document.createElement('img');
+  const cardinfo = document.createElement('div');
+  const nametitle = document.createElement('h3');
+  const usernamep = document.createElement('p');
+  const locationp = document.createElement('p');
+  const profilep = document.createElement('p');
+  const addressp = document.createElement('a');
+  const follower = document.createElement('p');
+  const following = document.createElement('p') 
+  const biop = document.createElement('p')
+
+
+  //place elements
+  carddiv.appendChild(userimg);
+  carddiv.appendChild(cardinfo);
+  cardinfo.appendChild(nametitle);
+  cardinfo.appendChild(usernamep);
+  cardinfo.appendChild(locationp);
+  cardinfo.appendChild(profilep);
+  profilep.appendChild(addressp);
+  cardinfo.appendChild(follower);
+  cardinfo.appendChild(following);
+  cardinfo.appendChild(biop);
+
+  //set style classes
+  carddiv.classList.add('card');
+  cardinfo.classList.add('card-info');
+  nametitle.classList.add('name');
+  usernamep.classList.add('username');
+
+  //add content
+  userimg.src = imageUrl;
+  nametitle.textContent = realname;
+  usernamep.textContent = githubname;
+  locationp.textContent = reallocation;
+  addressp.src = githubaddress;
+  follower.textContent = followercount;
+  following.textContent = followingcount;
+  biop.textContent = userbio;
+
+
+
+  return carddiv
+}
+
+
 
 /* List of LS Instructors Github username's: 
   tetondan
